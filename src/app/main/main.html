@@ -1,0 +1,43 @@
+<script type="text/ng-template" id="error-messages">
+  <div ng-message="required" class="help-block">This field is required</div>
+  <div ng-message="maxlength" class="help-block">This field is too long</div>
+</script>
+
+<div class="row">
+  <div class="col-xs-12">
+    <h3>ABC <button class="btn btn-primary" ng-click="ctrlr.initCreate()">Create</button></h3>
+  </div>
+</div>
+
+<h3>Steps to reproduce the problem in chrome</h3>
+<ol>
+  <li>Press "Create" button</li>
+  <li>Click on the textfield</li>
+  <li>Click outside of the textfield</li>
+  <li>Press "Create" button again</li>
+</ol>
+Chrome will crash after the second click of the "Create" button.
+
+<div class="row">
+  <div class="col-xs-12" ng-hide="ctrlr.isModeInit()">
+    <div class="panel panel-default">
+      <div class="panel-body" style="height: 45vh;">
+        <form name="form1" class="form-horizontal" ng-submit="ctrlr.save(ctrlr.file1)" ng-init="ctrlr.setFormScope(this)">
+          <div class="form-group">
+            <span ng-class="ctrlr.validate('field1')">
+              <label for="field1" class="col-xs-1 control-label">Field 1</label>
+              <div class="col-xs-11">
+                <input type="text" class="form-control" name="field1" id="field1" ng-model="ctrlr.file1.field1" required />
+                <div ng-messages="form1.field1.$error" role="alert">
+                  <div ng-if="form1.field1.$touched">
+                    <div ng-messages-include="error-messages"></div>
+                  </div>
+                </div>
+              </div>
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
